@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? content_for(:title) : t('aplicacion.titulo') %></title>
+  <%# = favicon_link_tag "favicon.png" %>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+  <%= Gon::Base.render_data %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body class="navbar-top <%= @staff ? 'sidebar-xs' : '' %>">
+    <%= render 'menu/menu' %>
+    <%= render 'templates/custom_alert' %>
+    <%= content_for?(:body_container) ? yield(:body_container) : yield%>
+</body>
+</html>

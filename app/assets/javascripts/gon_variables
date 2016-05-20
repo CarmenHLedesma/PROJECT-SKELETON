@@ -1,0 +1,4 @@
+// dialogo_modal_id -> se usa para mostrar los dialogos modales.
+// array_eventos -> (Imputaciones_actividades) se usa para meter el array de eventos de los calendar.
+// mes_imputacion -> (Imputaciones_actividades) se usa para meter el mes de la imputación en el calendar.
+// edit

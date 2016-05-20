@@ -1,0 +1,11 @@
+<div class="page-header-content">
+  <div class="page-title">
+    <h1 class="content-group text-thin no-top-margin no-bottom-margin">
+      <% if @current and @accion.present? %>
+              <%= @accion + ' ' +  @current  %>
+          <% elsif @title.present? %>
+        <%= @title %>
+      <% end %>
+    </h1>
+  </div>
+</div>

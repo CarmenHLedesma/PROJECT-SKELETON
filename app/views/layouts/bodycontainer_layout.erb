@@ -1,0 +1,24 @@
+<% content_for :body_container do %>
+    <div class="page-container">
+      <div class="page-content">
+
+        <%= render 'menu/left_menu' %>
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+          <!-- Page header -->
+          <div class="page-header" >
+            <%= render partial: "menu/admin_currentaction" %>
+            <%= render partial: "menu/home_breadcrum"%>
+          </div>
+          <%= render partial: "menu/flash_messages" %>
+          <div class="content no-padding-top">
+            <%= yield %>
+            <%= render partial: "menu/footer"%>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

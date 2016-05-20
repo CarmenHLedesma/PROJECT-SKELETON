@@ -1,0 +1,11 @@
+<ul class="media-list chat-list content-group">
+  <li class="media date-step">
+    <span><%= t('comentarios.hoy')%></span>
+  </li>
+  <% @comentarios.each_with_index  do |comentario, i| %>
+      <%if comentario.id.present? %>
+          <%= render '/comentarios/comentario', {i: i, comentario: comentario}%>
+      <% end %>
+  <% end %>
+</ul>
+<%= render 'comentarios/form_comentario' %>

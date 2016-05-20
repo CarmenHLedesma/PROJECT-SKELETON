@@ -1,0 +1,12 @@
+es:
+  estados:
+    "0": 'Inactivo'
+    "1": 'Activo'
+  activado:
+    "0": 'Desactivado'
+    "1": 'Activado'
+  user:
+    rol:
+      0: 'becario'
+      1: 'super_admin'
+      2: 'admin'

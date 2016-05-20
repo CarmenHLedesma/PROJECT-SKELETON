@@ -1,0 +1,23 @@
+<%= form_for ((@accion == :update) ? @comentario : :comentario), url: {action: @accion }, remote: true do |f| %>
+    <%= f.text_area :texto, { :class => "form-control content-group flotante", :rows => "3", :cols => "1", :placeholder => t('comentarios.introduce_comentario')}%>
+    <div class="row">
+      <div class="col-xs-6">
+        <ul class="icons-list icons-list-extended mt-10">
+          <li><a href="#" data-popup="tooltip" title="Send photo" data-container="body"><i class="icon-file-picture"></i></a></li>
+          <li><a href="#" data-popup="tooltip" title="Send video" data-container="body"><i class="icon-file-video"></i></a></li>
+          <li><a href="#" data-popup="tooltip" title="Send file" data-container="body"><i class="icon-file-plus"></i></a></li>
+        </ul>
+      </div>
+      <div class="col-xs-6 text-right">
+        <% if @accion != :create %>
+            <button type="submit" class="btn bg-teal-400 btn-labeled btn-labeled-right"><b><i class="icon-circle-right2"></i></b><%=t('botones.actualizar')%></button>
+            <%= link_to comentarios_path(@comentario.comentable_id, @comentario.comentable_type), remote: true  do %>
+                <button type="button" class="btn btn-danger btn-labeled btn-labeled-right "><b><i class="icon-circle-right2"></i></b><%=t('botones.cancelar')%></button>
+            <% end %>
+        <% else %>
+            <button type="submit" class="btn bg-teal-400 btn-labeled btn-labeled-right"><b><i class="icon-circle-right2"></i></b><%=t('botones.enviar')%></button>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+

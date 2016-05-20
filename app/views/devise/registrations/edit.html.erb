@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1><%= t("users_admin.users_control") %></h1>
+    <h4 class="h4_custom1"><%= t("users_admin.user_control_edit") %></h4>
+  </div>
+  <%= render partial: "menu/admin_breadcrum"%>
+  <%= render partial: "menu/flash_messages"%>
+  <div class="panel-body">
+    <div class="panel-body">
+      <%= form_for(@user, as: :user, url: registration_path( :user )) do |f| %>
+          <%= devise_error_messages! %>
+          <%= f.hidden_field :id %>
+          <div class="form-group">
+            <%= f.label t("users.user")  %><br />
+            <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: t("users.user")%>
+          </div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+          <div class="form-group">
+            <%= f.label t("users.email")  %><br />
+            <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: t("users.email")%>
+          </div>
+
+
+<%#          <div class="form-group">
+<%#            <%= f.label t("users.current_password") %>
+<%#            <br />
+<%#            <%= f.password_field :current_password, autocomplete: "off", class: "form-control",placeholder: t("users.current_password") %>
+<%#          </div>
+%>
+
+          <div class="form-group">
+            <%= f.label t("users.new_password")  %>
+            <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "off" , class: "form-control", placeholder: t("users.password")%>
+          </div>
+          <div class="form-group">
+            <%= f.label t("users.confirm_new_password") %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: t("users.confirm_password")%>
+          </div>
+          <div class="form-group">
+            <%= f.label t("users.status")  %><br />
+            <%= select_tag :status, options_for_select( dropdown_status , @status ), {:include_blank => true, :class => "obligatorio form-control"} %>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary btn-default" type="submit"><%= t("buttons.update") %></button>
+            <a href ="<%= users_path %>">
+              <button class="btn btn-danger" type="button"><%= t("buttons.cancel") %></button>
+            </a>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

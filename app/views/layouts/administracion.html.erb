@@ -1,0 +1,15 @@
+<% content_for :content do %>
+  <div class="panel panel-default users">
+    <div class="panel-heading">
+      <h1><%= t("users_admin.users_control") %></h1>
+      <h4 class="h4_custom1"><%= t("users_admin.users_control_explain") %></h4>
+    </div>
+    <%= render partial: "menu/admin_breadcrum"%>
+    <%= render partial: "menu/flash_messages"%>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

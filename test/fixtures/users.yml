@@ -1,0 +1,23 @@
+right:
+  id: 1
+  username: user
+  email: user@dms.es
+  encrypted_password: <%= Devise::Encryptor.digest(User, '123456789') %>
+  sign_in_count: 13
+  rol: todos
+
+admin:
+  id: 2
+  username: admin
+  email: admin@dms.es
+  encrypted_password: <%= Devise::Encryptor.digest(User, '123456789') %>
+  sign_in_count: 13
+  rol: principal
+
+nobody:
+  id: 3
+  username: nobody
+  email: nobody@dms.es
+  encrypted_password: <%= Devise::Encryptor.digest(User, '123456789') %>
+  sign_in_count: 13
+  rol: ninguno

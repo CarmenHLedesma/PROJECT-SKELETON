@@ -1,0 +1,55 @@
+<% empleado = comentario.user.empleado %>
+<% if (empleado == current_user.empleado) %>
+    <li class="media reversed">
+      <div class="media-body">
+        <div class="media-content">
+          <%= comentario.texto %>
+          <i class="icon-checkmark4 <%= comentario.check ? 'check_leido' : 'check_recibido'%>"></i>
+        </div>
+        <span class="media-annotation display-block mt-10">
+          <%= l(comentario.updated_at.to_date,format: :fecha_ficha) %>
+          <% if !comentario.check %>
+            <%= link_to comentario_path(comentario), method: :delete, data: { confirm: t('acciones.confirmacion') }, remote: true do %>
+              <i class="icon-trash position-right text-muted"></i>
+              <% end %>
+              <%= link_to edit_comentario_path(comentario, comentario.comentable_id, comentario.comentable_type), remote: true do %>
+              <i class="icon-pencil5 position-right text-muted"></i>
+              <% end %>
+          <% end %>
+        </span>
+      </div>
+
+      <div class="media-right">
+        <a href="#" class="btn bg-blue btn-rounded btn-icon btn-lg">
+          <span class="letter-icon"><%= empleado.nombre[0].capitalize + empleado.apellidos[0].capitalize %></span>
+        </a>
+      </div>
+    </li>
+<% else %>
+    <li class="media">
+      <div class="media-left">
+        <a href="#" class="btn bg-teal btn-rounded btn-icon btn-lg">
+          <span class="letter-icon"><%= siglas_empleado(empleado) %></span>
+        </a>
+      </div>
+
+      <div class="media-body">
+        <div class="media-content">
+          <%= comentario.texto %>
+          <i class="icon-checkmark4 <%= comentario.check ? 'check_leido' : 'check_recibido'%>"></i>
+        </div>
+        <span class="media-annotation display-block mt-10">
+          <%= l(comentario.updated_at.to_date,format: :fecha_ficha) %>
+          <% if !comentario.check %>
+            <%= link_to comentario_path(comentario), method: :delete, data: { confirm: t('acciones.confirmacion') }, remote: true do %>
+              <i class="icon-trash position-right text-muted"></i>
+              <% end %>
+              <%= link_to edit_comentario_path(comentario, comentario.comentable_id, comentario.comentable_type), remote: true do %>
+              <i class="icon-pencil5 position-right text-muted"></i>
+              <% end %>
+          <% end %>
+        </span>
+      </div>
+    </li>
+<% end %>
+

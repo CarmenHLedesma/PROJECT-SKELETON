@@ -1,0 +1,74 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    models:
+      'comentario':
+        one: 'Comentario'
+        other: 'Comentarios'
+      'users':
+        one: 'Usuario'
+        other: 'Usuarios'
+
+    attributes:
+      'comentario':
+        user_id: 'Usuario'
+        texto: 'Texto'
+        comentable_id: 'Comentable id'
+        comentable_type: 'Tipo'
+        check: 'Check'
+      'user':
+        username: 'Usuario'
+        email: 'Email'
+        password: 'Contraseña'
+        rol: 'Rol'
+        confirm_password: 'Confirmación de contraseña'
+        status: 'Estado'
+        created_at: 'Creado'
+        updated_at: 'Actualizado'
+        logged_at: 'Logeado'
+        actions: 'Acciones'
+
+    errors:
+      messages:
+        record_invalid: "registro no válido"
+        blank: "no puede estar vacío"
+        taken: "debe ser único"
+        format: "no está en el formato correcto"
+        telephone_format: &telephone_format "no está en el formato correcto. Ej: +3462613843"
+        zip_format: &zip_format "no está en el formato correcto. Ej: 12345"
+        date_format: &date_format "no está en el formato correcto. Ej: dd/mm/aaaa"
+        float_format: &float_format "no está en el formato correcto. Ej: 1.7"
+        email_format: &email_format "no está en el formato correcto. Ej: usuario@dominio.es"
+        pass_format: &pass_format "demasiado corta. Al menos 8 caracteres"
+        postal_code_format: &postal_code_format "no está en el formato correcto. Ej: 23140"
+
+      models:
+        'user':
+          attributes:
+            email:
+              invalid: *email_format
+            password:
+              too_short: *pass_format
+            password_confirmation:
+              confirmation: "debe coincidir"
+
+

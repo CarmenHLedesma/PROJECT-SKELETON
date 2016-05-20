@@ -1,0 +1,16 @@
+
+if (($('#comentarios').length == 0) || (!$('#comentarios').hasClass('in'))) {
+    console.log('if');
+    $('#container-modal').append('<%= j render "/comentarios/modal_comentarios", { objeto: @objeto, accion: @accion }  %>');
+    $('#comentarios').modal('show');
+}else{
+    console.log('else');
+    $('#comentarios').find('.modal-body').empty().html('<%= j render "/comentarios/modal_body", { objeto: @objeto, accion: @accion }  %>');
+}
+setTimeout(function(){
+    $(".media-list").animate({ scrollTop: $(".media-list").last().prop("scrollHeight")}, 1000);
+},700);
+
+
+
+

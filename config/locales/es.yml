@@ -1,0 +1,252 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  #título de la aplicación
+  aplicacion:
+    titulo: "SKELETON"
+    alert: "SKELETON dice:"
+  no_tiene_permiso: "No tiene permiso para entrar en esta sección"
+  no_se_guarda: "No se puede guardar en %{table} porque hay %{error}."
+  estado: "Estado"
+  resumen: "Resumen"
+
+  # Pantalla de Login
+  login:
+    titulo: "Accede a tu cuenta"
+    credenciales: "Tus credenciales"
+    username: "Nombre de usuario"
+    pass: "Contraseña"
+    recordar: "Recordar"
+    olvido: "¿Olvidó su contraseña?"
+    entrar: "Entrar"
+    terminos: "Términos y Condiciones"
+    cookies: "Política de Cookies"
+    pie_login1: "Al continuar, confirma que ha leído los "
+    pie_login2: " y la "
+  # /Pantalla de Login
+
+
+  # MENÚ -- INICIO
+  main: "Acciones"
+  home: "Inicio"
+  comentarios:
+    titulo: "Comentarios"
+    hoy: "Hoy"
+    introduce_comentario: "Introduce tu comentario..."
+  usuarios: "Usuarios"
+  # MENU -- FIN
+
+  # BOTONES -- INICIO
+  botones:
+    acciones: "Acciones"
+    aceptar: "Aceptar"
+    activar: "Activar"
+    actualizar: "Actualizar"
+    cancelar: "Cancelar"
+    confirmar: "Confirmar"
+    desactivar: "Desactivar"
+    deshacer: "Deshacer"
+    editar: "Editar"
+    entrar: "Entrar"
+    enviar: "Enviar"
+    guardar: "Guardar"
+    imprimir: "Imprimir"
+    limpiar: "Limpiar"
+    mostrar: "Mostrar"
+    no: "No"
+    logout: "Salir"
+    si: "Sí"
+    validar: "Validar"
+    vista_previa: "Vista previa"
+    volver: "Volver"
+  # BOTONES -- FIN
+
+
+  # ACCIONES -- INICIO
+  acciones:
+    nuevo: "Nuevo"
+    nueva: "Nueva"
+    editar: "Editar"
+    configuracion: "Configuración de "
+    eliminar: "Eliminar"
+    cerrar: "Cerrar"
+    anadir: "Añadir"
+    buzon: "Bandeja de entrada"
+    listado: "Listado de "
+    datos: "Datos de contacto"
+    resumen: "Resumen de"
+    confirmacion: "¿Está seguro?"
+    creado: "creado correctamente"
+    creada: "creada correctamente"
+    actualizado: "actualizado correctamente"
+    actualizada: "actualizada correctamente"
+    eliminado: "desactivado correctamente"
+    eliminada: "desactivada correctamente"
+    no_eliminado: "no desactivado correctamente"
+    no_eliminada: "no desactivada correctamente"
+    dar_todos: "Dar todos"
+    por_defecto: "Restaurar por defecto"
+    quitar_todos: "Quitar todos"
+    creo: "generó"
+    actualizo: "actualizó"
+    accion_realizada: "Acción %{nombre} realizada correctamente"
+    validar: "Validar"
+  # ACCIONES -- FIN
+
+
+  # DIALOGS -- INICIO
+#  dialog:
+#    eliminar_evento:
+#      id: "eliminar_evento"
+#      titulo: "Confirmar eliminar evento"
+#      texto: "¿Esta seguro que desea eliminar el evento seleccionado?"
+#    eliminar_comentario:
+#      id: "eliminar_comentario"
+#      titulo: "Confirmar eliminar comentario"
+#      texto: "¿Esta seguro que desea eliminar el elemento seleccionado?"
+  # DIALOGS -- FIN
+
+
+  # FORMATS: DATES AND TIMES
+  times:
+    horas: "h"
+    minutos: "min"
+
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: alrededor de 1 hora
+        other: alrededor de %{count} horas
+      about_x_months:
+        one: alrededor de 1 mes
+        other: alrededor de %{count} meses
+      about_x_years:
+        one: alrededor de 1 año
+        other: alrededor de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: "%{count} días"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minutos
+      month: Mes
+      second: Segundos
+      year: Año
+  # I18n.l( Date.current(), format: :fecha_ficha )
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      inverse: "%H:%M - %d/%m/%Y"
+      only_hours: "%H:%M"
+      only_date: "%d/%m/%Y"
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    -
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - Domingo
+    - Lunes
+    - Martes
+    - Miércoles
+    - Jueves
+    - Viernes
+    - Sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      longer: "%A, %d de %B de %Y"
+      short: "%d de %b"
+      fecha_ficha: "%A, %e %b %Y"
+      months: "%B %Y"
+      month_short: '%m/%Y'
+      db: "%Y-%m-%d"
+    month_names:
+    -
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+
+  calendario:
+    Jan: "ene"
+    Feb: "feb"
+    Mar: "mar"
+    Apr: "abr"
+    May: "may"
+    Jun: "jun"
+    Jul: "jul"
+    Aug: "ago"
+    Sep: "sep"
+    Oct: "oct"
+    Nov: "nov"
+    Dec: "dic"
+
+    # FORMATS: DATES AND TIMES

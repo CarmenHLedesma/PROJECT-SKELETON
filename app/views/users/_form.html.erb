@@ -1,0 +1,61 @@
+<fieldset>
+  <%= nested_form_for @user, html: {:class => 'form-horizontal'} do |f| %>
+      <%= render layout:  "layouts/formcontainer_layout" do %>
+          <div class="row">
+            <div class="form-group col-md-6 col-sm-offset-1 col-md-offset-0 col-sm-10">
+              <%= f.label :username, { :class => 'control-label col-sm-4 align-right'} %>
+              <div class="col-sm-8 col-xs-12 ">
+                <%= f.text_field :username, { :class => 'form-control' }%>
+              </div>
+            </div>
+            <div class="form-group col-md-6 col-sm-offset-1 col-md-offset-0 col-sm-10">
+              <%= f.label :email, { :class => 'control-label col-sm-4 align-right'} %>
+              <div class="col-sm-8 col-xs-12 ">
+                <%= f.text_field :email, { :class => 'form-control' }%>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6 col-sm-offset-1 col-md-offset-0 col-sm-10">
+              <%= f.label :rol, { :class => 'control-label col-sm-4 align-right'} %>
+              <div class="col-sm-8 col-xs-12 ">
+                <%= f.select :rol, t('user.rol').map{|x,y| [ y.capitalize, y ]}, {include_blank: true}, {class: 'select'} %>
+                <%#= f.number_field :rol, { :class => 'form-control' }%>
+              </div>
+            </div>
+          </div>
+
+
+            <div class="row">
+              <div class="form-group ">
+                <h2 class="control-label js-etiqueta-uc col-xs-2 col-xs-offset-1 text-thin " style = "display:<%= f.object.clientes.size > 0 ?  "block" : "none" %>" ><%= t('activerecord.models.cliente.other') %></h2>
+              </div>
+            </div>
+
+            <div class="actions col-xs-12 mt-15">
+              <div class="text-right">
+
+            <%= f.fields_for :users_clientes do |uc| %>
+
+                <div class="form-group col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-10">
+                  <%= uc.label :cliente_id, { :class => 'control-label col-sm-4 align-right'}%>
+                  <div class="col-sm-6 col-xs-12"> <!-- @clientes_asignables son los clientes a los cuales se les puede asignar el clientes actual, en principio todos-->
+                    <%= uc.collection_select :cliente_id, @clientes_asignables, :id, :opcion, {include_blank: true}, {class: 'js-select js-select-disable ', :onchange => 'select_disable_observers_change();'} %>
+                  </div>
+                  <div class="col-xs-12 col-sm-1 align-right">
+                    <%= uc.link_to_remove raw('<i class="glyphicon glyphicon-trash"></i>'), class:"btn bg-danger-600 js-eliminar-uc", onclick: 'select_disable_wait(); control_etiqueta_uc_disable( this );' %>
+                  </div>
+                </div>
+                <div class="js-ajuste-row row", style="display:none">
+                </div>
+            <% end%>
+                <%= f.link_to_add t('acciones.asociar_cliente'), :users_clientes, class: 'btn btn-success js-anadir-uc margin-top20', onclick: 'select_disable_wait();'%>
+
+              <button type="submit" class="btn btn-primary margin-top20"><%= t('botones.guardar')%>
+                <i class="icon-arrow-right14 position-right"></i>
+              </button>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+</fieldset>

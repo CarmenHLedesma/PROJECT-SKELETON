@@ -1,0 +1,40 @@
+<%= render layout: "layouts/formcontainer_layout" do%>
+    <fieldset>
+      <%= form_tag ruta_buscador, method: 'get' do%>
+          <div>
+            <div class="panel-heading no-padding-top no-padding-bottom ">
+              <h1 class="text-thin no-margin-top "><%= t('formularios.buscador') %></h1>
+              <div class="heading-elements">
+                <ul class="icons-list button-search">
+                  <li><a data-action="collapse" data-toggle="collapse" data-target="#demo"></a></li>
+
+                </ul>
+              </div>
+            </div>
+            <div class="panel-body no-padding-top no-padding-bottom" id="demo">
+              <% model = modelo_buscador.model%>
+              <div class="form-horizontal">
+                <%= fields_for :buscador do |buscador|%>
+                    <%= hidden_field_tag :limpiar, "false"%>
+                    <% @listado_buscador.each do |campo, valores|%>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <%= label_tag (model.human_attribute_name campo), nil, class: 'control-label col-lg-2 align-right',name: campo %>
+                            <div class="col-lg-10">
+                              <%= buscador_field(valores,campo,buscador)%>
+                            </div>
+                          </div>
+                        </div>
+                    <% end %>
+                <% end %>
+              </div>
+              <div class="pull-right">
+                <button type="reset" class="btn btn-warning"><%= t('botones.limpiar')%> <i class="icon-cross position-right"></i></button>
+                <button type="submit" class="btn btn-primary"><%= t('botones.filtrar')%> <i class=" icon-search4 position-right"></i></button>
+              </div>
+
+            </div>
+          </div>
+      <% end %>
+    </fieldset>
+<% end %>

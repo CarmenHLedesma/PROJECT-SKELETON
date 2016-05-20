@@ -1,0 +1,18 @@
+<div class="breadcrumb-line">
+  <ol class="breadcrumb">
+    <li role="presentation">
+      <i class="icon-home2 position-left"></i>
+      <%= link_to t("home"), inicio_root_path , role: "menuitem", tabindex: "-1" %>
+    </li>
+    <%if @parent%>
+        <li role="presentation">
+          <%= link_to @parent.capitalize, @parent_path , role: "menuitem", tabindex: "-1" %>
+        </li>
+    <% end %>
+    <% if @current_pl %>
+        <li class="active" >
+          <%= link_to @current_pl, @current_path , role: "menuitem", tabindex: "-1" %>
+        </li>
+    <% end %>
+  </ol>
+</div>

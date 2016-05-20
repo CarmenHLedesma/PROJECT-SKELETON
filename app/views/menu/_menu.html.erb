@@ -1,0 +1,42 @@
+<div class="navbar navbar-inverse navbar-fixed-top bg-dark-blue-700 border-bottom-blue-300">
+  <div class="navbar-header">
+    <a class="navbar-brand text-thin" href="/"> SKELETON </a>
+
+    <ul class="nav navbar-nav pull-right visible-xs-block">
+      <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+      <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+    </ul>
+  </div>
+
+  <div class="navbar-collapse collapse" id="navbar-mobile">
+    <% if user_signed_in? %>
+            <ul class="nav navbar-nav">
+              <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+            </ul>
+        <% end %>
+
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+          <li class="dropdown dropdown-user">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              <%= image_tag 'image.png'%>
+              <span><%= current_user.username%></span>
+              <i class="caret"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
+              <!--<li><a href="#"><i class="icon-coins"></i> My balance</a></li>-->
+              <!--<li><a href="#"><span class="badge badge-warning pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>-->
+              <li class="divider"></li>
+              <li>
+                    <i class="icon-cog5"></i> <%= t('empleados.configuracion') %>
+              </li>
+              <li>
+                <a href="<%= destroy_user_session_path %>" data-method="delete" ><i class="icon-switch2"></i> Logout</a></li>
+            </ul>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,266 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+
+//= require font_styles.scss
+//= require bootstrap.min
+//= require core.min
+//= require components.min
+//= require components
+//= require colors.min
+//= require animate.min
+//= require styles/bootstrap_extra
+//= require styles/emails.css
+
+
+
+// OVERRIDE -- BEGIN
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(asset_path('fonts/bootstrap/glyphicons-halflings-regular.eot'));
+  src: url(asset_path('fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'),
+  url(asset_path('fonts/bootstrap/glyphicons-halflings-regular.woff')) format('woff'),
+  url(asset_path('fonts/bootstrap/glyphicons-halflings-regular.ttf')) format('truetype'),
+  url(asset_path('fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
+}
+.winter-img{
+  background: image-url('fotoHome.jpg');
+  background-size: cover;
+  filter: brightness(60%);
+  -webkit-filter: brightness(60%);
+  -moz-filter: brightness(60%);
+  -ms-filter: brightness(60%);
+  -o-filter: brightness(60%);
+}
+
+body {
+  font-size:14px;
+}
+h1 small, h2 small, h3 small, h4 small, .h1 small, .h2 small, .h3 small, .h4 small{
+  font-size: 15px;
+}
+
+.h5 small, h5 small {
+  color: #333 !important;
+}
+
+.disable{
+  color: grey;
+}
+.alert{
+  border-radius: 0;
+}
+.navbar-brand {
+  padding-top:6px;
+  height:44px;
+}
+.navbar-brand>img{
+  margin-top: 10px;
+  height: 10px;
+}
+.navigation>li.active>a, .navigation>li.active>a:hover, .navigation>li.active>a:focus{
+  background: #0277BD;
+}
+.navbar-header{
+  min-width:200px;
+}
+// Color dia marcado datepicker
+.picker__day--highlighted, .picker__day--highlighted:hover, .picker--focused .picker__day--highlighted{
+  background: #0277BD
+}
+
+//FullCalendar
+.edit_time{
+  min-width: 50px;
+  text-align: center;
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.18);
+  border: none;
+  margin-left: 6px;
+}
+
+.fc-time{
+  text-align: center;
+}
+
+.fc-event{
+  font-weight: 100;
+}
+
+@media (min-width: 769px){
+  .sidebar-xs .sidebar-main .navigation-main>li>a>span{
+    background-color: #0277BD;
+    border-color: #0277BD;
+  }
+}
+
+
+.chat-list .reversed .media-content:not([class*=bg-]){
+  background-color: #f5f5f5;
+  border-color: #f5f5f5;
+  color: #333;
+}
+// OVERRIDE -- END
+
+
+// CLASES ESTILOS UNICOS -- BEGIN
+.margin-top20{
+  margin-top: 20px;
+}
+.margin-top28{
+  margin-top: 28px;
+}
+.margin-bottom20{
+  margin-bottom: 20px;
+}
+.margin-bottom28{
+  margin-bottom: 28px;
+}
+.no-top-margin{
+  margin-top: 0 !important;
+}
+.no-bottom-margin{
+  margin-bottom: 0 !important;
+}
+
+.align-left{
+  text-align: left !important;
+}
+
+.align-right{
+  text-align: right !important;
+}
+
+.display-none{
+  display: none;
+}
+
+.display-inline{
+  display: inline;
+}
+.width-50p{
+  width: 70%;
+}
+
+// CLASES ESTILOS UNICOS -- END
+
+// COLORES -- BEGIN
+.bg-dark-blue-700{
+  background: darken(#0277BD, 15%) !important;
+}
+
+.bg-dark-blue-800{
+  background: darken(#0277BD, 28%) !important;
+}
+
+button.btn a{
+  color: #fff;
+}
+// COLORES -- END
+
+//BUGS
+// Al desplegarse aliniados diversos paneles, el elemento de la cabecera se solapa con el menu contextual
+.panel-body>.heading-elements{
+  z-index: inherit;
+}
+
+.table-responsive-listados{
+  padding-bottom: 45px;
+}
+.table-responsive-listados > table.table{
+  margin-bottom: 35px;
+}
+
+
+.botonesHome{
+  padding:80px 30px 60px 30px;
+  .glyphicon{
+    font-size:80px;
+  }
+  p{
+    margin-top:20px;
+  }
+}
+[data-linked-div]{
+  cursor: pointer;
+}
+
+[data-linked-div]:hover{
+
+}
+
+textarea.flotante{
+  resize:vertical ;
+}
+.check_recibido{
+  color: #4CAF50;
+}
+.check_leido{
+  color: #2196F3;
+}
+
+.no-padding-label {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+
+//Aliniacion cambiante por resolucion
+
+.text-xs-left { text-align: left; }
+.text-xs-right { text-align: right; }
+.text-xs-center { text-align: center; }
+.text-xs-justify { text-align: justify; }
+
+
+@media (min-width: 769px) {
+  .text-sm-left { text-align: left; }
+  .text-sm-right { text-align: right; }
+  .text-sm-center { text-align: center; }
+  .text-sm-justify { text-align: justify; }
+
+}
+
+@media (min-width: 1025px) {
+  .text-md-left { text-align: left; }
+  .text-md-right { text-align: right; }
+  .text-md-center { text-align: center; }
+  .text-md-justify { text-align: justify; }
+}
+
+@media (min-width: 1200px) {
+  .text-lg-left { text-align: left; }
+  .text-lg-right { text-align: right; }
+  .text-lg-center { text-align: center; }
+  .text-lg-justify { text-align: justify; }
+  .custom-medio-left{
+
+  }
+}
+
+.custom-media-left {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .custom-media-left {
+    text-align: center;
+    margin: 0 auto;
+    bottom: 15px;
+  }
+}
+

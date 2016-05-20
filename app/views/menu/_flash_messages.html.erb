@@ -1,0 +1,29 @@
+<% model = self.controller.get_model_for_errors %>
+<div class="form-group flash_messages">
+  <%if flash.any? %>
+
+      <% flash.each do |key, value| %>
+          <div class="
+                <% if key.to_s != "notice" %>
+                  alert alert-danger
+                <% else %>
+                  alert alert-success
+                <% end %>
+                            ">
+            <%= value %>
+          </div>
+      <% end %>
+  <% end %>
+
+  <% if model.try(:errors) %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= t("no_se_guarda", table: model.class.model_name.human, error: pluralize( model.errors.count, "error") )%></h2>
+        <ul>
+          <% model.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+
+  <% end %>
+</div>

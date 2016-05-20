@@ -1,0 +1,107 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="page-container login-container bg-grey-800" >
+
+      <!-- Page content -->
+      <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+          <!-- Content area -->
+          <div class="content">
+
+            <!-- Advanced login -->
+            <form action="index.html">
+              <div class="panel panel-body login-form">
+                <div class="text-center">
+                  <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+                  <h5 class="content-group"><%= t('login.titulo') %><small class="display-block"><%= t('login.credenciales') %></small></h5>
+                </div>
+
+                <div class="form-group has-feedback has-feedback-left">
+                  <%= f.text_field :login, autocomplete: "off", placeholder: "#{ t('login.username') }", class: "form-control input-lg" %>
+                  <div class="form-control-feedback">
+                    <i class="icon-user text-muted"></i>
+                  </div>
+                </div>
+
+                <div class="form-group has-feedback has-feedback-left">
+                  <%= f.password_field :password, autocomplete: "off", placeholder: "#{ t('login.pass') }", class: "form-control input-lg" %>
+                  <div class="form-control-feedback">
+                    <i class="icon-lock2 text-muted"></i>
+                  </div>
+                </div>
+
+                <div class="form-group login-options">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label class="checkbox-inline">
+                        <input type="checkbox" class="styled" checked="checked">
+                        <%= t('login.recordar') %>
+                      </label>
+                    </div>
+
+                    <div class="col-sm-6 text-right">
+                      <a href="login_password_recover.html" style="font-size: smaller" ><%= t('login.olvido') %></a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="btn bg-blue btn-block"><%= t('login.entrar') %> <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+                <span class="help-block text-center no-margin"><%= t('login.pie_login1') + ' ' %><a href="#"><%= t('login.terminos') %></a><%= ' ' + t('login.pie_login2') + ' ' %><a href="#"><%= t('login.cookies') %></a></span>
+              </div>
+            </form>
+            <!-- /advanced login -->
+
+            <!-- Footer -->
+            <div class="footer text-muted">
+              &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
+            </div>
+            <!-- /footer -->
+
+          </div>
+          <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+      </div>
+      <!-- /page content -->
+
+    </div>
+<% end %>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+    <%= image_tag("logo-diebold.png", { :class => "icon-navbar inline" }) %>
+
+    <%= f.text_field :login, autocomplete: "off", placeholder: "Login", class: "form-control input-lg" %>
+
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "form-control input-lg" %>
+
+    <%= devise_error_messages! %>
+    <% flash.each do |key, value| %>
+        <div class="
+            <% if key.to_s != "notice" %>
+                alert alert-danger
+            <% else %>
+                alert alert-success<% end %>
+            ">
+          <%= value %>
+        </div>
+    <% end %>
+    <% if devise_mapping.rememberable? -%>
+        <span><%= f.check_box :remember_me %>
+          <%= f.label :remember_me %></span>
+    <% end -%>
+    <div class="modal-footer">
+      <div class="col-md-12">
+        <button class="btn btn-primary" type="submit"><%= t("buttons.sign_in") %></button>
+        <button class="btn btn-info" type="button" onclick="clear_login_form()"><%= t("buttons.clear") %></button>
+      </div>
+    </div>
+<%end%>
+<% render "devise/shared/links" %>
+

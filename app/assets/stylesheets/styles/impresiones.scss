@@ -1,0 +1,136 @@
+// configuración de página
+
+@page{
+  size: A4 landscape;
+  margin: 0.5cm 0.5cm 0.5cm 0.5cm;
+  //size: auto;
+}
+
+@media print {
+  // This is for printing options
+
+  h1:first-child {
+    page-break-before: avoid;
+  }
+
+  .filters, .flash_messages, .breadcrumb, .webpage_heading, .gap-between-pages , .menu-gap {
+    display: none;
+  }
+
+}
+
+.menu-gap {
+  margin-top:60px;
+}
+
+.gap-between-pages {
+  margin: 1em;
+  padding: 1em;
+}
+
+.print-head {
+  display: block;
+  position: relative;
+  top: 0pt;
+  left:0pt;
+  right: 0pt;
+
+  font-size: 200%;
+  text-align: center;
+
+  .logo_report_preview {
+    float: right;
+    width: 75mm;
+    padding: 0.5em;
+  }
+
+}
+
+.preview {
+  background: white;
+}
+
+.page {
+  page-break-before: always;
+}
+
+.page , .first-page, .last-page {
+  display: inline-block;
+
+  page-break-inside: avoid;
+
+  padding: 0;
+  margin: 0;
+  width: 277mm; //297 - 20 (margin 10)
+  height: 190mm; // 210 - 20 (margin 10)
+
+  h1 {
+    margin-top: 0.5em;
+    margin-botom: 1em;
+  }
+
+  .page_body {
+    width: 227mm;//277mm;
+    height: 130mm;//155mm;
+    overflow: hidden;
+    margin-top: 15mm;
+    margin-bottom: 10mm;
+    margin-left: 25mm;
+    margin-right: 25mm;
+
+    .half {
+      width: 113mm;//136mm;
+      height: inherit;
+      float: left;
+    }
+
+    .half_h {
+      height: 65mm;
+      width: inherit;
+    }
+
+    .prop33 {
+      width: 74mm;//136mm;
+      height: inherit;
+      float: left;
+    }
+
+    .prop67 {
+      width: 152mm;//136mm;
+      height: inherit;
+      float: left;
+    }
+
+    .prop33_h {
+      height: 42mm;
+      width: inherit;
+    }
+
+    .prop67_h {
+      height: 87mm;
+      width: inherit;
+    }
+  }
+}
+@media screen {
+  .page, .first-page, .last-page {
+    border-style: solid;
+    padding: 10mm;
+    width: 297mm; //297 - 20 (margin)
+    height: 210mm; // 210 - 20 (margin)
+  }
+}
+
+
+.print-foot {
+  display: block;
+  position: relative;
+  bottom: 0pt;
+  right: 0pt;
+
+  font-size: 150%;
+  padding: 0.5em;
+}
+
+
+

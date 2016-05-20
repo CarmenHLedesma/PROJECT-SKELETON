@@ -1,0 +1,39 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.label-destino-resumen {
+    background-color: white !important;
+    border-right-width: 3px !important;
+    font-size: medium !important;
+}
+
+.label-minutos-resumen {
+    padding: 5px 10px;
+    font-size: 18px;
+}
+
+.grey-background {
+    background-color:#f5f5f5
+}
+
+.destino-total {
+    border-right-color:black;
+    color:black !important
+}
+
+.margin-top-total {
+    margin-top: 10px;
+}
+
+.titulo-resumen-proyecto {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding: 0;
+}
+
+.hr-resumen {
+    width: 70%;
+}

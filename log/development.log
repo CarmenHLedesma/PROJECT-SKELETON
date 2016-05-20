@@ -1,0 +1,2214 @@
+  [1m[36m (93.9ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (219.7ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to DeviseCreateUsers (20150818094706)
+  [1m[35m (146.2ms)[0m  CREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `username` varchar(255) DEFAULT '' NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `status` int(11) DEFAULT 1 NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (155.0ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_username`  ON `users` (`username`) [0m
+  [1m[35m (126.1ms)[0m  CREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) 
+  [1m[36m (188.1ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150818094706')[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to AlterUsersTable (20150826160755)
+  [1m[36m (213.6ms)[0m  [1mALTER TABLE `users` ADD `deleted_at` datetime[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150826160755')[0m
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to RemoveStatusFromUsers (20150828075704)
+  [1m[36m (229.6ms)[0m  [1mALTER TABLE `users` DROP `status`[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150828075704')[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to CreateLogs (20160107144551)
+  [1m[36m (198.0ms)[0m  [1mCREATE TABLE `logs` (`id` int(11) auto_increment PRIMARY KEY, `usuario_id` int(11), `accion` varchar(255), `controller` varchar(255), `ip` varchar(255), `params` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160107144551')[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreateComentarios (20160118175250)
+  [1m[36m (179.6ms)[0m  [1mCREATE TABLE `comentarios` (`id` int(11) auto_increment PRIMARY KEY, `user_id` int(11), `texto` text, `comentable_id` int(11), `comentable_type` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160118175250')[0m
+  [1m[35m (2.5ms)[0m  COMMIT
+Migrating to AddCheckComentarios (20160119102039)
+  [1m[36m (186.0ms)[0m  [1mALTER TABLE `comentarios` ADD `check` tinyint(1)[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160119102039')[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreateVersions (20160408093456)
+  [1m[36m (224.9ms)[0m  [1mCREATE TABLE `versiones` (`id` int(11) auto_increment PRIMARY KEY, `item_type` varchar(255) NOT NULL, `item_id` int(11) NOT NULL, `event` varchar(255) NOT NULL, `whodunnit` varchar(255), `object` longtext, `created_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (219.6ms)[0m  CREATE  INDEX `index_versiones_on_item_type_and_item_id`  ON `versiones` (`item_type`, `item_id`) 
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160408093456')
+  [1m[36m (1.2ms)[0m  [1mCOMMIT[0m
+Migrating to AddRolUser (20160420072214)
+  [1m[35m (258.7ms)[0m  ALTER TABLE `users` ADD `rol` int(11) DEFAULT 0 NOT NULL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160420072214')
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to RemoveColumnRolIdFromUsers (20160422074740)
+  [1m[35m (201.4ms)[0m  ALTER TABLE `users` DROP FOREIGN KEY `users_rol_id_fk`
+Mysql2::Error: Can't DROP 'users_rol_id_fk'; check that column/key exists: ALTER TABLE `users` DROP FOREIGN KEY `users_rol_id_fk`
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to RemoveColumnRolIdFromUsers (20160422074740)
+  [1m[35m (0.3ms)[0m  ALTER TABLE `users` DROP `rol_id`
+Mysql2::Error: Can't DROP 'rol_id'; check that column/key exists: ALTER TABLE `users` DROP `rol_id`
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to RemoveColumnRolIdFromUsers (20160422074740)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160422074740')[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+Migrating to DropAccesibilidades (20160422094430)
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE `accesibilidades`[0m
+Mysql2::Error: Unknown table 'project_skeleton.accesibilidades': DROP TABLE `accesibilidades`
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (0.2ms)[0m  [1m
+          SELECT fk.referenced_table_name as 'to_table'
+                ,fk.referenced_column_name as 'primary_key'
+                ,fk.column_name as 'column'
+                ,fk.constraint_name as 'name'
+          FROM information_schema.key_column_usage fk
+          WHERE fk.referenced_column_name is not null
+            AND fk.table_schema = 'PROJECT_SKELETON'
+            AND fk.table_name = 'comentarios'
+        [0m
+  [1m[35m (0.1ms)[0m  SHOW CREATE TABLE `comentarios`
+  [1m[36m (0.1ms)[0m  [1m
+          SELECT fk.referenced_table_name as 'to_table'
+                ,fk.referenced_column_name as 'primary_key'
+                ,fk.column_name as 'column'
+                ,fk.constraint_name as 'name'
+          FROM information_schema.key_column_usage fk
+          WHERE fk.referenced_column_name is not null
+            AND fk.table_schema = 'PROJECT_SKELETON'
+            AND fk.table_name = 'logs'
+        [0m
+  [1m[35m (0.1ms)[0m  SHOW CREATE TABLE `logs`
+  [1m[36m (0.1ms)[0m  [1m
+          SELECT fk.referenced_table_name as 'to_table'
+                ,fk.referenced_column_name as 'primary_key'
+                ,fk.column_name as 'column'
+                ,fk.constraint_name as 'name'
+          FROM information_schema.key_column_usage fk
+          WHERE fk.referenced_column_name is not null
+            AND fk.table_schema = 'PROJECT_SKELETON'
+            AND fk.table_name = 'users'
+        [0m
+  [1m[35m (0.1ms)[0m  SHOW CREATE TABLE `users`
+  [1m[36m (0.1ms)[0m  [1m
+          SELECT fk.referenced_table_name as 'to_table'
+                ,fk.referenced_column_name as 'primary_key'
+                ,fk.column_name as 'column'
+                ,fk.constraint_name as 'name'
+          FROM information_schema.key_column_usage fk
+          WHERE fk.referenced_column_name is not null
+            AND fk.table_schema = 'PROJECT_SKELETON'
+            AND fk.table_name = 'versiones'
+        [0m
+  [1m[35m (0.1ms)[0m  SHOW CREATE TABLE `versiones`
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'admin@dmsti.es' LIMIT 1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`username` = 'Admin' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = 'admin@dmsti.es' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'admin@dmsti.es' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM `users`  WHERE `users`.`username` = 'Admin' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = 'admin@dmsti.es' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `rol`, `updated_at`, `username`) VALUES ('2016-05-20 13:58:08', 'admin@dmsti.es', '$2a$10$5aqL3xPm8YZiFG.vCCZWWuNBwZc9gRAm3y3T9yjzKagSZF6d441IK', 1, '2016-05-20 13:58:08', 'Admin')
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE (`users`.`username` = 'Admin' AND `users`.`id` != 1) LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM `users`  WHERE (`users`.`email` = 'admin@dmsti.es' AND `users`.`id` != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 13:58:17 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-05-20 13:58:17 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (2.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (449.7ms)
+Completed 500 Internal Server Error in 2042ms
+
+ActionView::Template::Error (couldn't find file 'especificos/provincias' with type 'application/javascript'):
+     6:   <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+     7:   <%= Gon::Base.render_data %>
+     8:   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+     9:   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    10:   <%= csrf_meta_tags %>
+    11:   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    12:   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  app/assets/javascripts/application.js:35
+  app/views/layouts/application.html.erb:9:in `_app_views_layouts_application_html_erb__1464389500461709203_70298856803000'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (32.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-05-20 13:59:04 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (13.7ms)
+  Rendered menu/_menu.html.erb (0.9ms)
+  Rendered templates/_custom_alert.html.erb (0.6ms)
+Completed 200 OK in 737ms (Views: 734.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started GET "/images/logo-diebold.png" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+ActionController::RoutingError (No route matches [GET] "/images/logo-diebold.png"):
+  actionpack (4.1.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `call'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.0) lib/rails/engine.rb:514:in `call'
+  railties (4.1.0) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.5) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (16.5ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (6.5ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (18.7ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (144.0ms)
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 13:59:05 +0200
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-05-20 13:59:10 +0200
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4SYUsiyor1tSphQje3Nec7PhgR2h9X7/JrQqTvvu4fs=", "user"=>{"login"=>"Admin", "password"=>"[FILTERED]"}}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE (lower(username) = 'admin')  ORDER BY `users`.`id` ASC LIMIT 1
+Completed 401 Unauthorized in 81ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4SYUsiyor1tSphQje3Nec7PhgR2h9X7/JrQqTvvu4fs=", "user"=>{"login"=>"Admin", "password"=>"[FILTERED]"}}
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (13.2ms)
+  Rendered menu/_menu.html.erb (0.2ms)
+  Rendered templates/_custom_alert.html.erb (0.3ms)
+Completed 200 OK in 409ms (Views: 335.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started GET "/images/logo-diebold.png" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+ActionController::RoutingError (No route matches [GET] "/images/logo-diebold.png"):
+  actionpack (4.1.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `call'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.0) lib/rails/engine.rb:514:in `call'
+  railties (4.1.0) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.5) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (13.8ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.6ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (182.7ms)
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 13:59:11 +0200
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4SYUsiyor1tSphQje3Nec7PhgR2h9X7/JrQqTvvu4fs=", "user"=>{"login"=>"Admin", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE (lower(username) = 'admin')  ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 401 Unauthorized in 74ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4SYUsiyor1tSphQje3Nec7PhgR2h9X7/JrQqTvvu4fs=", "user"=>{"login"=>"Admin", "password"=>"[FILTERED]"}}
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (12.4ms)
+  Rendered menu/_menu.html.erb (0.2ms)
+  Rendered templates/_custom_alert.html.erb (0.3ms)
+Completed 200 OK in 360ms (Views: 288.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:16 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 13:59:17 +0200
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-05-20 13:59:22 +0200
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4SYUsiyor1tSphQje3Nec7PhgR2h9X7/JrQqTvvu4fs=", "user"=>{"login"=>"Admin", "password"=>"[FILTERED]"}}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE (lower(username) = 'admin')  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE `users` SET `current_sign_in_at` = '2016-05-20 13:59:22', `current_sign_in_ip` = '127.0.0.1', `last_sign_in_at` = '2016-05-20 13:59:22', `last_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1, `updated_at` = '2016-05-20 13:59:22' WHERE `users`.`id` = 1
+  [1m[36m (35.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 122ms (ActiveRecord: 35.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 13:59:22 +0200
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+
+ActionController::RoutingError (uninitialized constant EmailsController):
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:238:in `const_get'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:238:in `block in constantize'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `each'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `inject'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `constantize'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.1.0) lib/action_dispatch/routing/mapper.rb:45:in `call'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:676:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.5.5) lib/rack/etag.rb:23:in `call'
+  rack (1.5.5) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.5) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.5) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.5) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.0) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.0) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `call'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.0) lib/rails/engine.rb:514:in `call'
+  railties (4.1.0) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.5) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (13.5ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.2ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (139.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 14:01:43 +0200
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/railties-4.1.0/lib/rails/templates/rails/welcome/index.html.erb (0.7ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-05-20 14:02:08 +0200
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (5.2ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (7.8ms)
+  Rendered menu/_left_menu.html.erb (63.3ms)
+Completed 500 Internal Server Error in 80ms
+
+ActionView::Template::Error (undefined local variable or method `emails_path' for #<#<Class:0x007fdf79821440>:0x007fdf79828ba0>):
+    36:           <li class="navigation-header"><span><%= t('main')%></span> <i class="icon-menu" title="Main pages"></i></li>
+    37: 
+    38:           <li <%= controller?("emails") ? 'class=active' : '' %> >
+    39:             <%= link_to emails_path do %>
+    40:                 <i class="glyphicon glyphicon-inbox"></i> <span class="text-thin"><%= t('emails.index')%></span>
+    41:             <% end %>
+    42:             <ul>
+  app/views/menu/_left_menu.html.erb:39:in `_app_views_menu__left_menu_html_erb__3388924306263704094_70298849790680'
+  app/views/layouts/bodycontainer_layout.erb:5:in `block in _app_views_layouts_bodycontainer_layout_erb__4556798968873826309_70298896516780'
+  app/views/layouts/bodycontainer_layout.erb:1:in `_app_views_layouts_bodycontainer_layout_erb__4556798968873826309_70298896516780'
+  app/controllers/users_controller.rb:16:in `index'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (11.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-05-20 14:03:11 +0200
+  [1m[35mUser Load (0.2ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (4.7ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (5.4ms)
+  Rendered menu/_left_menu.html.erb (66.6ms)
+Completed 500 Internal Server Error in 79ms
+
+ActionView::Template::Error (undefined local variable or method `emails_path' for #<#<Class:0x007fdf7b0b9b38>:0x007fdf7b0b8c38>):
+    36:           <li class="navigation-header"><span><%= t('main')%></span> <i class="icon-menu" title="Main pages"></i></li>
+    37: 
+    38:           <li <%= controller?("emails") ? 'class=active' : '' %> >
+    39:             <%= link_to emails_path do %>
+    40:                 <i class="glyphicon glyphicon-inbox"></i> <span class="text-thin"><%= t('emails.index')%></span>
+    41:             <% end %>
+    42:             <ul>
+  app/views/menu/_left_menu.html.erb:39:in `_app_views_menu__left_menu_html_erb__3388924306263704094_70298849790680'
+  app/views/layouts/bodycontainer_layout.erb:5:in `block in _app_views_layouts_bodycontainer_layout_erb__4556798968873826309_70298896516780'
+  app/views/layouts/bodycontainer_layout.erb:1:in `_app_views_layouts_bodycontainer_layout_erb__4556798968873826309_70298896516780'
+  app/controllers/users_controller.rb:16:in `index'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (10.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 14:03:14 +0200
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (4.6ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (5.4ms)
+  Rendered menu/_left_menu.html.erb (62.2ms)
+Completed 500 Internal Server Error in 71ms
+
+ActionView::Template::Error (undefined local variable or method `emails_path' for #<#<Class:0x007fdf7b0b9b38>:0x007fdf77b4d440>):
+    36:           <li class="navigation-header"><span><%= t('main')%></span> <i class="icon-menu" title="Main pages"></i></li>
+    37: 
+    38:           <li <%= controller?("emails") ? 'class=active' : '' %> >
+    39:             <%= link_to emails_path do %>
+    40:                 <i class="glyphicon glyphicon-inbox"></i> <span class="text-thin"><%= t('emails.index')%></span>
+    41:             <% end %>
+    42:             <ul>
+  app/views/menu/_left_menu.html.erb:39:in `_app_views_menu__left_menu_html_erb__3388924306263704094_70298849790680'
+  app/views/layouts/bodycontainer_layout.erb:5:in `block in _app_views_layouts_bodycontainer_layout_erb__4556798968873826309_70298896516780'
+  app/views/layouts/bodycontainer_layout.erb:1:in `_app_views_layouts_bodycontainer_layout_erb__4556798968873826309_70298896516780'
+  app/controllers/users_controller.rb:16:in `index'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (10.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (5.5ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (6.3ms)
+  Rendered menu/_left_menu.html.erb (0.6ms)
+  Rendered menu/_admin_currentaction.html.erb (0.6ms)
+  Rendered menu/_home_breadcrum.html.erb (2.3ms)
+  Rendered menu/_flash_messages.html.erb (0.9ms)
+  Rendered menu/_footer.html.erb (0.3ms)
+  Rendered menu/_menu.html.erb (4.2ms)
+  Rendered templates/_custom_alert.html.erb (0.2ms)
+  Rendered layouts/application.html.erb (330.2ms)
+Completed 200 OK in 349ms (Views: 347.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:23 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/image.png" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2016-05-20 14:04:24 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 14:06:54 +0200
+  [1m[35mUser Load (0.2ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (4.6ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (7.0ms)
+  Rendered menu/_left_menu.html.erb (0.6ms)
+  Rendered menu/_admin_currentaction.html.erb (0.1ms)
+  Rendered menu/_home_breadcrum.html.erb (1.7ms)
+  Rendered menu/_flash_messages.html.erb (0.2ms)
+  Rendered menu/_footer.html.erb (0.1ms)
+  Rendered menu/_menu.html.erb (3.7ms)
+  Rendered templates/_custom_alert.html.erb (0.2ms)
+  Rendered layouts/application.html.erb (333.3ms)
+Completed 200 OK in 380ms (Views: 348.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/image.png" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2016-05-20 14:06:55 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 14:09:14 +0200
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (4.5ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (6.6ms)
+  Rendered menu/_left_menu.html.erb (0.2ms)
+  Rendered menu/_admin_currentaction.html.erb (0.1ms)
+  Rendered menu/_home_breadcrum.html.erb (0.7ms)
+  Rendered menu/_flash_messages.html.erb (0.1ms)
+  Rendered menu/_footer.html.erb (0.1ms)
+  Rendered menu/_menu.html.erb (4.3ms)
+  Rendered templates/_custom_alert.html.erb (0.2ms)
+  Rendered layouts/application.html.erb (334.7ms)
+Completed 200 OK in 350ms (Views: 348.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:14 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:14 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:14 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:14 +0200
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:14 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:14 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/image.png" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2016-05-20 14:09:15 +0200
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-05-20 14:09:21 +0200
+
+ActionController::RoutingError (uninitialized constant Administracion::RegistrationsController):
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:240:in `const_get'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:240:in `block in constantize'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `each'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `inject'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `constantize'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.1.0) lib/action_dispatch/routing/mapper.rb:45:in `call'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:676:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.5.5) lib/rack/etag.rb:23:in `call'
+  rack (1.5.5) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.5) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.5) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.5) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.0) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.0) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `call'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.0) lib/rails/engine.rb:514:in `call'
+  railties (4.1.0) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.5) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (67.7ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.3ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.4ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (148.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 14:12:37 +0200
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (3.8ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (6.2ms)
+Completed 500 Internal Server Error in 9ms
+
+ActionView::Template::Error (translation missing: es.time.formats.fecha_ficha):
+    2:   <div class="col-md-12">
+    3:     <div class="panel panel-flat">
+    4:       <div class="panel-body">
+    5:         <%= yield %>
+    6:       </div>
+    7:     </div>
+    8:   </div>
+  app/views/users/index.html.erb:43:in `block (2 levels) in _app_views_users_index_html_erb___909097660504955478_70298880942460'
+  app/views/users/index.html.erb:32:in `block in _app_views_users_index_html_erb___909097660504955478_70298880942460'
+  app/views/layouts/_formcontainer_layout.html.erb:5:in `_app_views_layouts__formcontainer_layout_html_erb___3341941840142576711_70298881364540'
+  app/views/users/index.html.erb:1:in `_app_views_users_index_html_erb___909097660504955478_70298880942460'
+  app/controllers/users_controller.rb:16:in `index'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (10.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 14:13:48 +0200
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (4.7ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (7.6ms)
+  Rendered menu/_left_menu.html.erb (0.2ms)
+  Rendered menu/_admin_currentaction.html.erb (0.1ms)
+  Rendered menu/_home_breadcrum.html.erb (0.7ms)
+  Rendered menu/_flash_messages.html.erb (0.2ms)
+  Rendered menu/_footer.html.erb (0.1ms)
+  Rendered menu/_menu.html.erb (3.5ms)
+  Rendered templates/_custom_alert.html.erb (0.2ms)
+  Rendered layouts/application.html.erb (370.3ms)
+Completed 200 OK in 387ms (Views: 385.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/image.png" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2016-05-20 14:13:49 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT `users`.* FROM `users`[0m
+  Rendered layouts/_formcontainer_layout.html.erb (4.4ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (6.5ms)
+  Rendered menu/_left_menu.html.erb (0.1ms)
+  Rendered menu/_admin_currentaction.html.erb (0.1ms)
+  Rendered menu/_home_breadcrum.html.erb (0.7ms)
+  Rendered menu/_flash_messages.html.erb (0.2ms)
+  Rendered menu/_footer.html.erb (0.1ms)
+  Rendered menu/_menu.html.erb (3.8ms)
+  Rendered templates/_custom_alert.html.erb (0.2ms)
+  Rendered layouts/application.html.erb (380.5ms)
+Completed 200 OK in 399ms (Views: 397.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:45 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/image.png" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2016-05-20 14:14:46 +0200
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-05-20 14:14:48 +0200
+
+ActionController::RoutingError (uninitialized constant Administracion::RegistrationsController):
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:240:in `const_get'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:240:in `block in constantize'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `each'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `inject'
+  activesupport (4.1.0) lib/active_support/inflector/methods.rb:236:in `constantize'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.1.0) lib/action_dispatch/routing/mapper.rb:45:in `call'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.1.0) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.0) lib/action_dispatch/routing/route_set.rb:676:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.5.5) lib/rack/etag.rb:23:in `call'
+  rack (1.5.5) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.5) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.5) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.5) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.0) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.0) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.0) lib/rails/rack/logger.rb:20:in `call'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.0) lib/rails/engine.rb:514:in `call'
+  railties (4.1.0) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.5) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/sgbautista/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (6.6ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.2ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendered /Users/sgbautista/.rvm/gems/ruby-2.0.0-p645/gems/actionpack-4.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (83.7ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+Processing by Administracion::RegistrationsController#new as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered layouts/_formcontainer_layout.html.erb (53.3ms)
+  Rendered devise/registrations/new.html.erb within layouts/bodycontainer_layout (56.8ms)
+  Rendered menu/_left_menu.html.erb (0.2ms)
+  Rendered menu/_admin_currentaction.html.erb (0.1ms)
+  Rendered menu/_home_breadcrum.html.erb (0.4ms)
+  Rendered menu/_flash_messages.html.erb (0.2ms)
+  Rendered menu/_footer.html.erb (0.1ms)
+  Rendered menu/_menu.html.erb (4.5ms)
+  Rendered templates/_custom_alert.html.erb (0.3ms)
+  Rendered layouts/application.html.erb (378.3ms)
+Completed 200 OK in 449ms (Views: 443.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:21 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/image.png" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 14:16:22 +0200
+
+
+Started GET "/users" for 127.0.0.1 at 2016-05-20 14:16:28 +0200
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT `users`.* FROM `users`
+  Rendered layouts/_formcontainer_layout.html.erb (4.6ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (5.4ms)
+  Rendered menu/_left_menu.html.erb (0.2ms)
+  Rendered menu/_admin_currentaction.html.erb (0.1ms)
+  Rendered menu/_home_breadcrum.html.erb (0.7ms)
+  Rendered menu/_flash_messages.html.erb (0.2ms)
+  Rendered menu/_footer.html.erb (0.1ms)
+  Rendered menu/_menu.html.erb (3.5ms)
+  Rendered templates/_custom_alert.html.erb (0.2ms)
+  Rendered layouts/application.html.erb (261.8ms)
+Completed 200 OK in 275ms (Views: 273.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/image.png" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started GET "/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2016-05-20 14:16:29 +0200
+
+
+Started DELETE "/users.1" for 127.0.0.1 at 2016-05-20 14:16:35 +0200
+Processing by Administracion::RegistrationsController#destroy as 
+  Parameters: {"authenticity_token"=>"eVXtJPswPir4WK64oyT8k0g5NhS/4fbUTv3MxRcttIU="}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1 LIMIT 1
+Redirected to http://0.0.0.0:3000/users
+Completed 302 Found in 5ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-05-20 14:16:35 +0200
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT `users`.* FROM `users`
+  Rendered layouts/_formcontainer_layout.html.erb (4.4ms)
+  Rendered users/index.html.erb within layouts/bodycontainer_layout (5.0ms)
+  Rendered menu/_left_menu.html.erb (0.2ms)
+  Rendered menu/_admin_currentaction.html.erb (0.1ms)
+  Rendered menu/_home_breadcrum.html.erb (0.7ms)
+  Rendered menu/_flash_messages.html.erb (0.2ms)
+  Rendered menu/_footer.html.erb (0.1ms)
+  Rendered menu/_menu.html.erb (3.6ms)
+  Rendered templates/_custom_alert.html.erb (0.2ms)
+  Rendered layouts/application.html.erb (330.4ms)
+Completed 200 OK in 343ms (Views: 341.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/bootstrap.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/colors.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/components.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/font_styles.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/core.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/animate.min.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/components.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/styles/bootstrap_extra.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/styles/emails.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/application.self.css?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/loaders/pace.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/core/libraries/jquery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/core/libraries/bootstrap.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/loaders/blockui.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/interactions.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/datepicker.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/core/libraries/jquery_ui/effects.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/forms/selects/select2.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/core/app.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/pages/form_select2.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/ui/moment/moment.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/fullcalendar.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/ui/fullcalendar/lang/es.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/pickers/daterangepicker.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/picker.time.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/pickers/anytime.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/pages/picker_date.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/pickers/pickadate/translations/es_ES.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/jquery_nested_form.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/auxiliary-rpage/responsive-paginate.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/core/libraries/jquery.mask.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/pages/form_checkboxes_radios.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/pages/picker_color.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switch.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/forms/styling/switchery.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/forms/styling/uniform.min.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/plugins/pickers/color/spectrum.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/observers.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/application.self.js?body=1" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/image.png" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/fonts/icomoon/icomoon.woff?3p0rtw" for 127.0.0.1 at 2016-05-20 14:16:36 +0200
+
+
+Started GET "/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2016-05-20 14:16:36 +0200

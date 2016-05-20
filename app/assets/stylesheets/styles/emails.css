@@ -1,0 +1,17 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.big-icons {
+    font-size: 35px !important;
+}
+
+.extrabig-icon {
+    font-size: 65px !important;
+}
+
+.base-color {
+    color: #014771;
+}
+
